@@ -1,0 +1,64 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< org.cubexmc:RuleGems >------------------------
+[INFO] Building RuleGems 1.0.7
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ RuleGems ---
+[INFO] Deleting C:\Users\Angus\Desktop\RuleGems\target
+[INFO] 
+[INFO] --- jacoco:0.8.12:prepare-agent (default) @ RuleGems ---
+[INFO] argLine set to -javaagent:C:\\Users\\Angus\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.12\\org.jacoco.agent-0.8.12-runtime.jar=destfile=C:\\Users\\Angus\\Desktop\\RuleGems\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ RuleGems ---
+[INFO] Copying 8 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ RuleGems ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 74 source files with javac [debug target 17] to target\classes
+[INFO] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/metrics/Metrics.java: C:\Users\Angus\Desktop\RuleGems\src\main\java\org\cubexmc\metrics\Metrics.java uses or overrides a deprecated API.
+[INFO] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/metrics/Metrics.java: Recompile with -Xlint:deprecation for details.
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] system modules path not set in conjunction with -source 17
+[INFO] 1 warning
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/manager/GemManager.java:[698,53] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/manager/GemManager.java:[702,53] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/manager/GemManager.java:[703,49] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/features/GemNavigator.java:[137,64] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/features/GemNavigator.java:[155,60] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/features/GemNavigator.java:[162,60] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/features/GemNavigator.java:[178,60] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/features/GemNavigator.java:[181,60] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/gui/MainMenuGUI.java:[35,44] package org.bukkit.org.cubexmc.utils does not exist
+[INFO] 9 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.611 s
+[INFO] Finished at: 2026-03-24T21:48:35-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project RuleGems: Compilation failure: Compilation failure: 
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/manager/GemManager.java:[698,53] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/manager/GemManager.java:[702,53] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/manager/GemManager.java:[703,49] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/features/GemNavigator.java:[137,64] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/features/GemNavigator.java:[155,60] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/features/GemNavigator.java:[162,60] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/features/GemNavigator.java:[178,60] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/features/GemNavigator.java:[181,60] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] /C:/Users/Angus/Desktop/RuleGems/src/main/java/org/cubexmc/gui/MainMenuGUI.java:[35,44] package org.bukkit.org.cubexmc.utils does not exist
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
