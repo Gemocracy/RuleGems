@@ -148,10 +148,19 @@ public class ApiServer {
                 }
                 
                 Player player = null;
+                UUID playerUuidObj = null;
+                String resolvedPlayerName = null;
+                
                 if (playerUuid != null) {
                     try {
-                        UUID uuid = UUID.fromString(playerUuid);
-                        player = Bukkit.getPlayer(uuid);
+                        playerUuidObj = UUID.fromString(playerUuid);
+                        player = Bukkit.getPlayer(playerUuidObj);
+                        if (player != null) {
+                            resolvedPlayerName = player.getName();
+                        } else {
+                            // 离线玩家：尝试从缓存获取玩家名称
+                            resolvedPlayerName = gemManager.getCachedPlayerName(playerUuidObj);
+                        }
                     } catch (IllegalArgumentException e) {
                         sendResponse(exchange, 400, objectMapper.writeValueAsString(
                             new GemDataResponse(false, "Invalid UUID format", null)));
@@ -159,17 +168,37 @@ public class ApiServer {
                     }
                 } else {
                     player = Bukkit.getPlayer(playerName);
+                    if (player != null) {
+                        playerUuidObj = player.getUniqueId();
+                        resolvedPlayerName = player.getName();
+                    } else {
+                        // 离线玩家：尝试通过名称查找UUID
+                        org.bukkit.OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(playerName);
+                        if (offlinePlayer.hasPlayedBefore()) {
+                            playerUuidObj = offlinePlayer.getUniqueId();
+                            resolvedPlayerName = offlinePlayer.getName();
+                        }
+                    }
                 }
                 
-                if (player == null) {
+                if (playerUuidObj == null) {
                     sendResponse(exchange, 404, objectMapper.writeValueAsString(
-                        new GemDataResponse(false, "Player not found or offline", null)));
+                        new GemDataResponse(false, "Player not found", null)));
                     return;
                 }
                 
                 // 获取玩家宝石数据
-                GemDataResponse.PlayerGemData gemData = ApiDataProvider.getPlayerGemData(player, gemManager);
-                GemDataResponse response = new GemDataResponse(true, "Success", gemData);
+                GemDataResponse.PlayerGemData gemData;
+                if (player != null) {
+                    // 在线玩家：获取完整数据
+                    gemData = ApiDataProvider.getPlayerGemData(player, gemManager);
+                } else {
+                    // 离线玩家：获取基础数据
+                    gemData = ApiDataProvider.getOfflinePlayerGemData(playerUuidObj, resolvedPlayerName, gemManager);
+                }
+                
+                String message = player != null ? "Success" : "Offline player data retrieved";
+                GemDataResponse response = new GemDataResponse(true, message, gemData);
                 
                 sendResponse(exchange, 200, objectMapper.writeValueAsString(response));
                 

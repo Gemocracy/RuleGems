@@ -22,19 +22,40 @@ import org.cubexmc.model.GemDefinition;
 public class ApiDataProvider {
     
     /**
-     * 获取玩家宝石数据
+     * 获取玩家宝石数据（在线玩家）
      */
     public static GemDataResponse.PlayerGemData getPlayerGemData(Player player, GemManager gemManager) {
         UUID playerId = player.getUniqueId();
         String playerName = player.getName();
         
-        // 获取持有的宝石
+        // 获取持有的宝石（仅在线玩家）
         List<GemDataResponse.HeldGem> heldGems = getHeldGems(player, gemManager);
         
         // 获取已兑换的宝石
         List<GemDataResponse.RedeemedGem> redeemedGems = getRedeemedGems(playerId, gemManager);
         
         // 获取宝石类型计数
+        Map<String, Integer> gemTypeCounts = getGemTypeCounts(playerId, gemManager);
+        
+        // 检查是否为全套拥有者
+        boolean isFullSetOwner = isFullSetOwner(playerId, gemManager);
+        
+        return new GemDataResponse.PlayerGemData(
+            playerId, playerName, heldGems, redeemedGems, gemTypeCounts, isFullSetOwner
+        );
+    }
+    
+    /**
+     * 获取离线玩家宝石数据（基础数据）
+     */
+    public static GemDataResponse.PlayerGemData getOfflinePlayerGemData(UUID playerId, String playerName, GemManager gemManager) {
+        // 离线玩家无法获取持有的宝石（空列表）
+        List<GemDataResponse.HeldGem> heldGems = new ArrayList<>();
+        
+        // 获取已兑换的宝石（可以从数据库获取）
+        List<GemDataResponse.RedeemedGem> redeemedGems = getRedeemedGems(playerId, gemManager);
+        
+        // 获取宝石类型计数（可以从数据库获取）
         Map<String, Integer> gemTypeCounts = getGemTypeCounts(playerId, gemManager);
         
         // 检查是否为全套拥有者
