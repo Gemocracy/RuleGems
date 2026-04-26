@@ -99,10 +99,26 @@ public class ApiServer {
             return false;
         }
         
-        // 检查令牌
+        // 检查令牌（支持 Bearer Token 和 URL 查询参数）
+        String token = null;
+        
+        // 1. 检查 HTTP Authorization Header
         String authHeader = exchange.getRequestHeaders().getFirst("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            String token = authHeader.substring(7);
+            token = authHeader.substring(7);
+        }
+        
+        // 2. 检查 URL 查询参数（如果 Authorization Header 不存在）
+        if (token == null) {
+            String query = exchange.getRequestURI().getQuery();
+            if (query != null && query.contains("token=")) {
+                Map<String, String> params = parseQueryParams(query);
+                token = params.get("token");
+            }
+        }
+        
+        // 验证令牌
+        if (token != null) {
             if (!config.isTokenValid(token)) {
                 plugin.getLogger().warning("API access denied: invalid token from " + clientIp);
                 return false;
